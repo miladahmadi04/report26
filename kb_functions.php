@@ -858,6 +858,7 @@ function kb_getRecentArticles($limit = 5) {
     
     $companyId = isset($_SESSION['company_id']) ? $_SESSION['company_id'] : null;
     
+    // Cambia la forma en que se usa el LIMIT
     $stmt = $pdo->prepare("SELECT a.*, 
                           CONCAT(p.first_name, ' ', p.last_name) as creator_name,
                           COALESCE(
@@ -869,8 +870,10 @@ function kb_getRecentArticles($limit = 5) {
                           LEFT JOIN personnel p ON u.id = p.user_id
                           WHERE a.company_id = ? AND a.status = 'published'
                           ORDER BY a.published_at DESC
-                          LIMIT ?");
-    $stmt->execute([$companyId, $limit]);
+                          LIMIT " . (int)$limit);
+    
+    // Ahora solo pasamos el companyId
+    $stmt->execute([$companyId]);
     
     return $stmt->fetchAll();
 }

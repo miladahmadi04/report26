@@ -334,6 +334,47 @@ if (function_exists('syncActiveCompany')) {
                 </a>
             </div>
             
+            <!-- منوی پایگاه دانش - اضافه شده -->
+            <div class="wp-menu-item">
+                <a href="kb_dashboard.php" class="<?php echo in_array(basename($_SERVER['PHP_SELF']), ['kb_dashboard.php', 'kb_article.php', 'kb_article_form.php', 'kb_articles.php', 'kb_category.php', 'kb_categories.php', 'kb_tag.php', 'kb_tags.php', 'kb_search.php', 'kb_statistics.php', 'kb_comments.php']) ? 'active' : ''; ?>">
+                    <i class="fas fa-book menu-icon"></i>
+                    <span class="menu-text">پایگاه دانش</span>
+                    <i class="fas fa-chevron-down menu-toggle-indicator"></i>
+                </a>
+                <div class="wp-submenu">
+                    <div class="wp-submenu-item">
+                        <a href="kb_dashboard.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'kb_dashboard.php' ? 'active' : ''; ?>">
+                            داشبورد پایگاه دانش
+                        </a>
+                    </div>
+                    <div class="wp-submenu-item">
+                        <a href="kb_articles.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'kb_articles.php' ? 'active' : ''; ?>">
+                            مدیریت مقالات
+                        </a>
+                    </div>
+                    <div class="wp-submenu-item">
+                        <a href="kb_categories.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'kb_categories.php' ? 'active' : ''; ?>">
+                            دسته‌بندی‌ها
+                        </a>
+                    </div>
+                    <div class="wp-submenu-item">
+                        <a href="kb_tags.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'kb_tags.php' ? 'active' : ''; ?>">
+                            برچسب‌ها
+                        </a>
+                    </div>
+                    <div class="wp-submenu-item">
+                        <a href="kb_comments.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'kb_comments.php' ? 'active' : ''; ?>">
+                            نظرات
+                        </a>
+                    </div>
+                    <div class="wp-submenu-item">
+                        <a href="kb_statistics.php" class="<?php echo basename($_SERVER['PHP_SELF']) == 'kb_statistics.php' ? 'active' : ''; ?>">
+                            آمار و گزارشات
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
             <!-- گزارشات - Reports -->
             <div class="wp-menu-item">
                 <a href="view_reports.php" class="<?php echo in_array(basename($_SERVER['PHP_SELF']), ['view_reports.php', 'view_report.php', 'report_management.php', 'report_categories.php']) ? 'active' : ''; ?>">
@@ -441,6 +482,14 @@ if (function_exists('syncActiveCompany')) {
                 </a>
             </div>
             
+            <!-- منوی پایگاه دانش برای مدیرعامل - اضافه شده -->
+            <div class="wp-menu-item">
+                <a href="kb_dashboard.php" class="<?php echo in_array(basename($_SERVER['PHP_SELF']), ['kb_dashboard.php', 'kb_article.php', 'kb_category.php', 'kb_search.php']) ? 'active' : ''; ?>">
+                    <i class="fas fa-book menu-icon"></i>
+                    <span class="menu-text">پایگاه دانش</span>
+                </a>
+            </div>
+            
             <!-- Coach Reports Menu for CEO -->
             <?php if (isset($_SESSION['can_view_coach_reports']) && $_SESSION['can_view_coach_reports']): ?>
             <div class="wp-menu-item">
@@ -494,6 +543,14 @@ if (function_exists('syncActiveCompany')) {
                 <a href="content_management.php" class="<?php echo in_array(basename($_SERVER['PHP_SELF']), ['content_management.php', 'content_add.php', 'content_edit.php', 'content_list.php', 'content_view.php']) ? 'active' : ''; ?>">
                     <i class="fas fa-file-alt menu-icon"></i>
                     <span class="menu-text">مدیریت محتوا</span>
+                </a>
+            </div>
+            
+            <!-- منوی پایگاه دانش برای پرسنل - اضافه شده -->
+            <div class="wp-menu-item">
+                <a href="kb_dashboard.php" class="<?php echo in_array(basename($_SERVER['PHP_SELF']), ['kb_dashboard.php', 'kb_article.php', 'kb_category.php', 'kb_search.php']) ? 'active' : ''; ?>">
+                    <i class="fas fa-book menu-icon"></i>
+                    <span class="menu-text">پایگاه دانش</span>
                 </a>
             </div>
             
