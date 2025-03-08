@@ -15,7 +15,28 @@ if (!kb_hasPermission('edit')) {
 }
 
 $message = '';
-$companyId = $_SESSION['company_id'];
+// اصلاح شده - بررسی وجود company_id در session
+$companyId = isset($_SESSION['company_id']) ? $_SESSION['company_id'] : null;
+
+// اگر company_id تنظیم نشده است و کاربر به چند شرکت دسترسی دارد، از اولین شرکت استفاده کنیم
+if ($companyId === null && isset($_SESSION['companies']) && !empty($_SESSION['companies'])) {
+    $companyId = $_SESSION['companies'][0]['company_id'];
+    // تنظیم شرکت فعال در session
+    $_SESSION['company_id'] = $companyId;
+    $_SESSION['company_name'] = $_SESSION['companies'][0]['company_name'];
+    
+    // اگر تابع همگام‌سازی شرکت فعال وجود دارد، آن را فراخوانی کنیم
+    if (function_exists('syncActiveCompany')) {
+        syncActiveCompany();
+    }
+}
+
+// اگر همچنان company_id تنظیم نشده، خطا نمایش دهیم
+if ($companyId === null) {
+    $_SESSION['error_message'] = 'لطفاً ابتدا یک شرکت فعال انتخاب کنید.';
+    redirect('kb_dashboard.php');
+}
+
 $userId = $_SESSION['user_id'];
 
 // دریافت شناسه مقاله برای ویرایش

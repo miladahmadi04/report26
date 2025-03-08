@@ -570,6 +570,9 @@ function kb_getPopularArticles($limit = 5) {
     
     $companyId = isset($_SESSION['company_id']) ? $_SESSION['company_id'] : null;
     
+    // Convert limit to integer and include directly in query
+    $limit = (int)$limit;
+    
     $stmt = $pdo->prepare("SELECT a.*, 
                           CONCAT(p.first_name, ' ', p.last_name) as creator_name,
                           COALESCE(
@@ -581,8 +584,8 @@ function kb_getPopularArticles($limit = 5) {
                           LEFT JOIN personnel p ON u.id = p.user_id
                           WHERE a.company_id = ? AND a.status = 'published'
                           ORDER BY a.views_count DESC
-                          LIMIT ?");
-    $stmt->execute([$companyId, $limit]);
+                          LIMIT $limit");
+    $stmt->execute([$companyId]);
     
     return $stmt->fetchAll();
 }
@@ -597,6 +600,9 @@ function kb_getTopRatedArticles($limit = 5) {
     
     $companyId = isset($_SESSION['company_id']) ? $_SESSION['company_id'] : null;
     
+    // Convert limit to integer and include directly in query
+    $limit = (int)$limit;
+    
     $stmt = $pdo->prepare("SELECT a.*, 
                           CONCAT(p.first_name, ' ', p.last_name) as creator_name,
                           COALESCE(
@@ -609,8 +615,8 @@ function kb_getTopRatedArticles($limit = 5) {
                           WHERE a.company_id = ? AND a.status = 'published'
                           AND EXISTS (SELECT 1 FROM kb_ratings WHERE article_id = a.id)
                           ORDER BY average_rating DESC, a.views_count DESC
-                          LIMIT ?");
-    $stmt->execute([$companyId, $limit]);
+                          LIMIT $limit");
+    $stmt->execute([$companyId]);
     
     return $stmt->fetchAll();
 }
@@ -625,6 +631,9 @@ function kb_getFeaturedArticles($limit = 5) {
     
     $companyId = isset($_SESSION['company_id']) ? $_SESSION['company_id'] : null;
     
+    // Convert limit to integer and include directly in query
+    $limit = (int)$limit;
+    
     $stmt = $pdo->prepare("SELECT a.*, 
                           CONCAT(p.first_name, ' ', p.last_name) as creator_name,
                           COALESCE(
@@ -636,8 +645,8 @@ function kb_getFeaturedArticles($limit = 5) {
                           LEFT JOIN personnel p ON u.id = p.user_id
                           WHERE a.company_id = ? AND a.status = 'published' AND a.is_featured = 1
                           ORDER BY a.published_at DESC
-                          LIMIT ?");
-    $stmt->execute([$companyId, $limit]);
+                          LIMIT $limit");
+    $stmt->execute([$companyId]);
     
     return $stmt->fetchAll();
 }
@@ -858,6 +867,9 @@ function kb_getRecentArticles($limit = 5) {
     
     $companyId = isset($_SESSION['company_id']) ? $_SESSION['company_id'] : null;
     
+    // Convert limit to integer and include directly in query
+    $limit = (int)$limit;
+    
     $stmt = $pdo->prepare("SELECT a.*, 
                           CONCAT(p.first_name, ' ', p.last_name) as creator_name,
                           COALESCE(
@@ -869,8 +881,8 @@ function kb_getRecentArticles($limit = 5) {
                           LEFT JOIN personnel p ON u.id = p.user_id
                           WHERE a.company_id = ? AND a.status = 'published'
                           ORDER BY a.published_at DESC
-                          LIMIT ?");
-    $stmt->execute([$companyId, $limit]);
+                          LIMIT $limit");
+    $stmt->execute([$companyId]);
     
     return $stmt->fetchAll();
 }
